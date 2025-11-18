@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b61bou6uxufc5"]
+
+[ext_resource type="Script" path="res://data/scripts/ui/debug_hud.gd" id="1_gdlgj"]
+
+[node name="DebugHUD" type="CanvasLayer"]
+layer = 0
+script = ExtResource("1_gdlgj")
+
+[node name="label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.5082, 0.77, 0.722003, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

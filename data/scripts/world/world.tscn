@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://c42onjfipvx27"]
+
+[ext_resource type="PackedScene" uid="uid://bmcfs8exxx81b" path="res://data/scenes/player/player.tscn" id="1_3dl0b"]
+[ext_resource type="PackedScene" uid="uid://clmj8e0fexncd" path="res://data/scenes/ui/console.tscn" id="2_ggd0i"]
+[ext_resource type="PackedScene" uid="uid://b61bou6uxufc5" path="res://data/scenes/ui/debug_hud.tscn" id="3_hsskw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n33mv"]
+albedo_color = Color(0.4268, 0.44, 0.44, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ngpbx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e1v55"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sjlc"]
+albedo_color = Color(0.546728, 0.308059, 0.156834, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ks7i"]
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="floor" type="StaticBody3D" parent="."]
+transform = Transform3D(40, 0, 0, 0, 1, 0, 0, 0, 40, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+material_override = SubResource("StandardMaterial3D_n33mv")
+mesh = SubResource("BoxMesh_ngpbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_e1v55")
+
+[node name="crates" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="crates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+material_override = SubResource("StandardMaterial3D_7sjlc")
+mesh = SubResource("BoxMesh_3ks7i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+shape = SubResource("BoxShape3D_e1v55")
+
+[node name="Player" parent="." instance=ExtResource("1_3dl0b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.877, 1.1, 5.042)
+invert_y = true
+
+[node name="crates2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="crates2"]
+material_override = SubResource("StandardMaterial3D_7sjlc")
+mesh = SubResource("BoxMesh_3ks7i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="crates2"]
+shape = SubResource("BoxShape3D_e1v55")
+
+[node name="ConsoleLayer" parent="." instance=ExtResource("2_ggd0i")]
+
+[node name="DebugHUD" parent="." instance=ExtResource("3_hsskw")]
